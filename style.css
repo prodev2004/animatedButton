@@ -1,0 +1,117 @@
+@import url(https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic);
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+body {
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    background-color: #151515;
+}
+
+label {
+    display: inline-block;
+    background-image: linear-gradient(to top right, #3535ff, #e200e2);
+    padding: .8rem 5rem;
+    font-size: 1.3rem;
+    border-radius: 100vw;
+    border: 2px solid #fff;
+    color: #fff;
+    cursor: pointer;
+}
+span {
+    display: inline-block;
+    margin-right: .5rem;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: .1rem;
+}
+.main {
+    transition: 200ms ease-in-out transform;
+}
+.dot-container {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    width: 70px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+}
+.dot {
+    width: 10px;
+    aspect-ratio: 1;
+    border-radius: 100%;
+    background-color: rgba(255, 255, 255, .8);
+    transform: translateY(10px);
+}
+.done {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    column-gap: 1rem;
+}
+.done-word span {
+    margin: 0 -2px;
+    opacity: 0;
+}
+.fa-check {
+    transform: scale(0);
+}
+
+@keyframes bounce {
+    0% { transform: translateY(10px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(10px); }
+}
+@keyframes remove {
+    0% { opacity: 0; }
+    50%, 90% { opacity: 1; }
+    100% { opacity: 0; }
+}
+@keyframes show-up {
+    from { transform: translateY(-50%); opacity: 0; }
+    to { transform: translateY(0%); opacity: 1; }
+}
+@keyframes check-icon {
+    0% { transform: scale(0); }
+    50% { transform: scale(1.5); }
+    100% { transform: scale(1); }
+}
+
+
+/* (~) selector selects the siblings */
+input:checked ~ label .main {
+    transform: scale(0);
+}
+input:checked ~ label .dot {
+    animation: bounce 1000ms ease-in-out infinite;
+    animation-delay: var(--delay);
+}
+input:checked ~ label .dot-container {
+    animation: remove 3000ms ease-in-out forwards;
+}
+input:checked ~ label .done-word span {
+    animation: show-up 500ms ease-in-out forwards;
+    animation-delay: var(--delay-2);
+}
+input:checked ~ label .fa-check {
+    animation: check-icon 800ms ease-in-out forwards;
+    animation-delay: 3000ms;
+}
+label:active {
+    transform: scale(.95);
+}
+
+input {
+    display: none;
+}
